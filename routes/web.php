@@ -1,9 +1,13 @@
 <?php
 
 use App\Http\Controllers\CarController;
-use App\Http\Controllers\OwnerController;
 use App\Models\Car;
+use App\Http\Controllers\OwnerController;
+use App\Models\Owner;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +20,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('owners', OwnerController::class);
-Route::resource('cars', CarController::class);
-Route::get('/cars.index',[CarController::class, 'cars.index'])->name('cars');
+Route::middleware('auth')->group(function(){
+    Route::resources([
+        'cars'=>CarController::class
+    ]);
 
+//    Route::post('/owners/{id}/addCar',[OwnerController::class,'addCar'])->name('owners.addCar');
+    Route::resources([
+        'owners'=>OwnerController::class
+    ]);
+});
+
+//Route::resources('cars',CarController::class);
+//Route::resources('owners',CarController::class);
+
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

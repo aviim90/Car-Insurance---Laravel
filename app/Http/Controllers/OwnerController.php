@@ -91,4 +91,14 @@ class OwnerController extends Controller
         $owner->delete();
         return redirect()->route('owners.index');
     }
+
+    public function addCar($id, Request $request){
+        $car=new Car();
+        $car->reg_number=$request->reg_number;
+        $car->brand=$request->brand;
+        $car->model=$request->model;
+        $car->owner_id=$id;
+        $car->save();
+        return redirect()->route('owners.edit',$id);
+    }
 }
