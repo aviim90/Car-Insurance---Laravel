@@ -15,9 +15,9 @@ class CarController extends Controller
      */
     public function index()
     {
-
+        $owners = Owner::all();
         $cars = Car::all();
-        return view("cars.index", ['cars'=>$cars, 'cars'=>$cars]);
+        return view("cars.index", ['cars'=>$cars, 'owners'=>$owners]);
     }
 
     /**
@@ -39,6 +39,25 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'reg_number' => 'required|min:2|max:6|unique:cars',
+            'brand' => 'required|min:2|max:15',
+            'model' => 'required|min:2|max:15',
+            'owner_id' => 'required',
+        ],
+            [
+                'reg_number.required' => 'Registration number is required',
+                'reg_number.min' => 'Registration number must be at least 1 symbol',
+                'reg_number.max' => 'Registration number cannot be more than 6 symbols',
+                'reg_number.unique' => 'This number already exists',
+                'brand.required' => 'Auto make is required',
+                'brand.min' => 'Make must be at least 2 characters long',
+                'brand.max' => 'Make cannot be more than 15 characters long',
+                'model.required' => 'Auto model is required',
+                'model.min' => 'Auto model must be at least 2 characters long',
+                'model.max' => 'Auto model cannot be more than 15 characters long',
+                'owner_id.required' => 'Owner is required',
+                ]);
         $car=new Car();
         $car->reg_number=$request->reg_number;
         $car->brand=$request->brand;
@@ -67,7 +86,8 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        return view('cars.update', ['car'=>$car]);
+        $owners=Owner::all();
+        return view('cars.update', ['car'=>$car, 'owners'=>$owners]);
     }
 
     /**
@@ -79,6 +99,25 @@ class CarController extends Controller
      */
     public function update(Request $request, Car $car)
     {
+        $request->validate([
+            'reg_number' => 'required|min:2|max:6|unique:cars',
+            'brand' => 'required|min:2|max:15',
+            'model' => 'required|min:2|max:15',
+            'owner_id' => 'required',
+        ],
+            [
+                'reg_number.required' => 'Registration number is required',
+                'reg_number.min' => 'Registration number must be at least 1 symbol',
+                'reg_number.max' => 'Registration number cannot be more than 6 symbols',
+                'reg_number.unique' => 'This number already exists',
+                'brand.required' => 'Auto make is required',
+                'brand.min' => 'Make must be at least 2 characters long',
+                'brand.max' => 'Make cannot be more than 15 characters long',
+                'model.required' => 'Auto model is required',
+                'model.min' => 'Auto model must be at least 2 characters long',
+                'model.max' => 'Auto model cannot be more than 15 characters long',
+                'owner_id.required' => 'Owner is required',
+            ]);
         $car->reg_number=$request->reg_number;
         $car->brand=$request->brand;
         $car->model=$request->model;

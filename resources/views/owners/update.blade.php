@@ -11,11 +11,30 @@
                             @method('PUT')
                             <div class="div mb-3">
                                 <label class="form-label">Name</label>
-                                <input class="form-control" type="text" name="name" value="{{$owner->name}}">
+                                <input class="form-control @error('name') is-invalid @enderror" type="text" name="name" value="{{$owner->name}}">
+                                @error('name')
+                                @foreach( $errors->get('name') as $error)
+                                    <div class="alert alert-danger"> {{ $error }} </div>
+                                @endforeach
+                                @enderror
                             </div>
                             <div class="div mb-3">
                                 <label class="form-label">Surname</label>
                                 <input class="form-control" type="text" name="surname" value="{{$owner->surname}}">
+                                @error('surname')
+                                @foreach( $errors->get('surname') as $error)
+                                    <div class="alert alert-danger"> {{ $error }} </div>
+                                @endforeach
+                                @enderror
+                            </div>
+                            <div class="div mb-3">
+                                <label class="form-label">Email</label>
+                                <input class="form-control" type="email" name="email" value="{{$owner->email}}">
+                                @error('email')
+                                @foreach( $errors->get('email') as $error)
+                                    <div class="alert alert-danger"> {{ $error }} </div>
+                                @endforeach
+                                @enderror
                             </div>
                             <div class="div">
                                 <button class="btn btn-success">Update</button>

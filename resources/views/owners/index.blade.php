@@ -13,6 +13,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Surname</th>
+                                <th>Email</th>
                                 <th>Car Owned</th>
                                 <th></th>
                             </tr>
@@ -22,6 +23,7 @@
                                 <tr>
                                     <td>{{$owner->name}}</td>
                                     <td>{{$owner->surname}}</td>
+                                    <td>{{$owner->email}}</td>
                                     <td>
                                         @foreach($owner->car as $ownedCar)
                                             {{$ownedCar->brand}} {{$ownedCar->model}}

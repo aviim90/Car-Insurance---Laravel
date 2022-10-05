@@ -36,9 +36,28 @@ class OwnerController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|min:2|max:15|',
+            'surname' => 'required|min:2|max:15',
+            'email' => 'required|max:24|email:rfc,dns|unique:owners',
+
+        ],
+            [
+                'name.required' => 'Name is required',
+                'name.min' => 'Name must be at least 2 characters long',
+                'name.max' => 'Name cannot be more than 15 characters long',
+                'surname.required' => 'Surname is required',
+                'surname.min' => 'Surname must be at least 2 characters long',
+                'surname.max' => 'Surname cannot be more than 15 characters long',
+                'email.required' => 'Email address is required',
+                'email.unique' => 'This email already exists',
+                'email.max' => 'Email cannot be more than 24 characters long',
+
+            ]);
         $owner=new Owner();
         $owner->name=$request->name;
         $owner->surname=$request->surname;
+        $owner->email=$request->email;
         $owner->save();
         return redirect()->route('owners.index');
     }
@@ -74,8 +93,27 @@ class OwnerController extends Controller
      */
     public function update(Request $request, Owner $owner)
     {
+        $request->validate([
+            'name' => 'required|min:2|max:15|',
+            'surname' => 'required|min:2|max:15',
+            'email' => 'required|max:24|email:rfc,dns|unique:owners',
+
+        ],
+            [
+                'name.required' => 'Name is required',
+                'name.min' => 'Name must be at least 2 characters long',
+                'name.max' => 'Name cannot be more than 15 characters long',
+                'surname.required' => 'Surname is required',
+                'surname.min' => 'Surname must be at least 2 characters long',
+                'surname.max' => 'Surname cannot be more than 15 characters long',
+                'email.required' => 'Email address is required',
+                'email.unique' => 'This email already exists',
+                'email.max' => 'Email cannot be more than 24 characters long',
+
+            ]);
         $owner->name=$request->name;
         $owner->surname=$request->surname;
+        $owner->email=$request->email;
         $owner->save();
         return redirect()->route('owners.index');
     }
@@ -92,13 +130,13 @@ class OwnerController extends Controller
         return redirect()->route('owners.index');
     }
 
-    public function addCar($id, Request $request){
-        $car=new Car();
-        $car->reg_number=$request->reg_number;
-        $car->brand=$request->brand;
-        $car->model=$request->model;
-        $car->owner_id=$id;
-        $car->save();
-        return redirect()->route('owners.edit',$id);
-    }
+//    public function addCar($id, Request $request){
+//        $car=new Car();
+//        $car->reg_number=$request->reg_number;
+//        $car->brand=$request->brand;
+//        $car->model=$request->model;
+//        $car->owner_id=$id;
+//        $car->save();
+//        return redirect()->route('owners.edit',$id);
+//    }
 }
