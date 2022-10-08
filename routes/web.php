@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\ShortCodeController;
 use App\Models\Car;
 use App\Http\Controllers\OwnerController;
 use App\Models\Owner;
+use App\Models\ShortCode;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,14 +27,14 @@ Route::middleware('auth')->group(function(){
         'cars'=>CarController::class
     ]);
 
-//    Route::post('/owners/{id}/addCar',[OwnerController::class,'addCar'])->name('owners.addCar');
     Route::resources([
         'owners'=>OwnerController::class
     ]);
+
 });
 
 //Route::resources('cars',CarController::class);
 //Route::resources('owners',CarController::class);
-
+Route::resource('shortC', ShortCodeController::class);
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

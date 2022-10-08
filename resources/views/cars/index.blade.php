@@ -8,6 +8,7 @@
                     <div class="card-body">
                         <a class="btn btn-primary" href={{route('cars.create')}}>Add Car</a>
                         <a class="btn btn-warning" href={{route('owners.index')}}>Owners</a>
+                        <a class="btn btn-warning" href={{route('shortC.index')}}>Short Codes</a>
                         <table class="table">
                             <thead>
                             <tr>
