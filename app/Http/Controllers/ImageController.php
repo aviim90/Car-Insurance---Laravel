@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\image;
+use App\Models\Car;
+use App\Models\Owner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
@@ -24,7 +27,8 @@ class ImageController extends Controller
      */
     public function create()
     {
-        //
+        $image=Image::all();
+        return view('images.create', ['image'=>$image]);
     }
 
     /**
@@ -35,7 +39,14 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $image=new Image();
+        $image=$request->file('image');
+        $filename=$request->car->id.'_'.rand().'.'.$image->extension();
+        $image->image=$filename;
+        $image->car_id=$request->car_id;
+        $image->storeAs('cars',$filename);
+        $image->save();
+        return redirect()->back();
     }
 
     /**
@@ -80,6 +91,7 @@ class ImageController extends Controller
      */
     public function destroy(image $image)
     {
-        //
+        $image->delete();
+        return redirect()->back();
     }
 }

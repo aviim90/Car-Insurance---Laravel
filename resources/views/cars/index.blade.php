@@ -19,7 +19,6 @@
                                 <th>Owner</th>
                                 <th>Photo</th>
                                 <th>Gallery</th>
-
                             </tr>
                             </thead>
                             <tbody>
