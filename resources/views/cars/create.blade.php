@@ -14,7 +14,7 @@
 {{--                                @endforeach--}}
 {{--                            </div>--}}
 {{--                        @endif--}}
-                        <form action="{{route('cars.store')}}" method="post">
+                        <form action="{{route('cars.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="div mb-3">
                                 <label class="form-label">Reg.Number</label>
@@ -60,6 +60,10 @@
                                     <div>{{$error}}</div>
                                 @endforeach
                                 @enderror
+                            </div>
+                            <div class="div mb-3">
+                                <label class="form-label">Auto Photo:</label>
+                                <input type="file" class="form-control" name="image">
                             </div>
                             <div class="div mb-3">
                                 <button class="btn btn-success">Add Car</button>

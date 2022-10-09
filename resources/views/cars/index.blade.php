@@ -9,6 +9,7 @@
                         <a class="btn btn-primary" href={{route('cars.create')}}>Add Car</a>
                         <a class="btn btn-warning" href={{route('owners.index')}}>Owners</a>
                         <a class="btn btn-warning" href={{route('shortC.index')}}>Short Codes</a>
+                        Tel.
                         <table class="table">
                             <thead>
                             <tr>
@@ -16,8 +17,8 @@
                                 <th>Make</th>
                                 <th>Model</th>
                                 <th>Owner</th>
-                                <th></th>
-                                <th></th>
+                                <th>Photo</th>
+                                <th>Gallery</th>
 
                             </tr>
                             </thead>
@@ -28,6 +29,7 @@
                                     <td>{{$car->brand}}</td>
                                     <td>{{$car->model}}</td>
                                     <td>{{$car->owner->name}} {{$car->owner->surname}}</td>
+                                    <td><a class="btn btn-primary" href="{{route('cars.gallery',$car->id)}}">Gallery</a></td>
                                     <td><a class="btn btn-success" href="{{route('cars.edit', $car->id)}}">Update</a>
                                     </td>
                                     <td>

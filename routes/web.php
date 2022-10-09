@@ -21,20 +21,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('cars', [CarController::class, 'index'])->name('cars.index');
+Route::get('owners', [OwnerController::class, 'index'])->name('owners.index');
+Route::get('shortC', [ShortCodeController::class, 'index'])->name('shortC.index');
 
-Route::middleware('auth')->group(function(){
-    Route::resources([
-        'cars'=>CarController::class
-    ]);
-
-    Route::resources([
-        'owners'=>OwnerController::class
-    ]);
-
+Route::middleware(['auth','code','userType'])->group(function() {
+    Route::resource('cars', CarController::class)->except(['index']);
+    Route::resource('owners', OwnerController::class)->except(['index']);
+    Route::resource('shortC', ShortCodeController::class)->except(['index']);
 });
 
-//Route::resources('cars',CarController::class);
-//Route::resources('owners',CarController::class);
-Route::resource('shortC', ShortCodeController::class);
+
+
+//Route::resource('shortC', ShortCodeController::class);
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
